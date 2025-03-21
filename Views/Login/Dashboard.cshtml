@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@* @{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>Welcome, @Context.Session.GetString("Username")!</h2>
+<p>You have successfully logged in.</p> *@
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    body {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .craft-card {
+        background-color: #f0e6d6;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px #999;
+        transition: background-color 0.3s;
+    }
+
+    .craft-card:hover {
+        background-color: #d8c6aa;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Crafting Dashboard</h2>
+
+    <!-- Search Bar -->
+    <div class="input-group mb-4">
+        <input type="text" id="searchBar" class="form-control" placeholder="Search Crafts..." onkeyup="filterCrafts()" />
+    </div>
+
+    <!-- Craft Categories -->
+    <div class="row" id="craftCategories">
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Paper Craft" })">
+                <div class="card craft-card">Paper Craft</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Bottle Craft" })">
+                <div class="card craft-card">Bottle Craft</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Fiber Craft" })">
+                <div class="card craft-card">Fiber Craft</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Clay" })">
+                <div class="card craft-card">Clay</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Basket Weaving" })">
+                <div class="card craft-card">Basket Weaving</div>
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="@Url.Action("CraftDetails", "Home", new { craft = "Teddy Bear Making" })">
+                <div class="card craft-card">Teddy Bear Making</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterCrafts() {
+        const filter = document.getElementById('searchBar').value.toLowerCase();
+        const cards = document.querySelectorAll('#craftCategories .col-md-4');
+        cards.forEach(card => {
+            card.style.display = card.innerText.toLowerCase().includes(filter) ? "block" : "none";
+        });
+    }
+</script>
